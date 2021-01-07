@@ -2,12 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/hlavniController"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EC3131"
-    android:backgroundTint="#FFFFFF"
-    tools:context=".PocasiActivity">
+    tools:context=".Activity_VypisPocasi"
+    android:id="@+id/hlavniController"
+    android:background="@drawable/pozadi_home">
 
     <ProgressBar
         android:id="@+id/nacitani"
@@ -53,7 +52,7 @@
         android:id="@+id/editTextText_poloha"
         android:layout_width="380dp"
         android:layout_height="30dp"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="15dp"
         android:background="@android:color/transparent"
@@ -91,6 +90,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="36dp"
             android:layout_marginEnd="50dp"
+            android:text="Teplota"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="200px"
@@ -130,6 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="16dp"
+            android:text="min"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -141,6 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="16dp"
+            android:text="max"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -153,10 +155,11 @@
             android:layout_marginStart="160dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="189dp"
+            android:text="Popis počasí"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.23"
+            app:layout_constraintHorizontal_bias="0.403"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_teplota" />
 
@@ -165,8 +168,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="403dp"
         android:layout_height="263dp"
-        android:background="#2196F3"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:layout_marginTop="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <TextView
             android:id="@+id/textView5"
@@ -186,6 +191,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="51dp"
+            android:text="Rychlost větru:"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@+id/textView5"
@@ -209,6 +215,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="37dp"
+            android:text="Západ Slunce:"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@+id/textView8"
@@ -232,6 +239,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="13dp"
             android:layout_marginTop="45dp"
+            android:text="Východ Slunce:"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@+id/textView9"
@@ -242,16 +250,12 @@
         android:id="@+id/button_najit"
         android:layout_width="259dp"
         android:layout_height="52dp"
-        android:layout_marginStart="129dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="189dp"
         android:text="Najít"
         android:textAllCaps="false"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.343"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText_poloha" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
