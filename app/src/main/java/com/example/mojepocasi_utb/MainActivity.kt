@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
         btnVyhledat.setOnClickListener {
             val intent = Intent(this, Activity_VypisPocasi::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
         val btnHistorie = findViewById(R.id.button_Historie) as Button
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         val btnKonec = findViewById(R.id.button_konec) as Button
         btnKonec.setOnClickListener {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
             super.finish()
         }
     }

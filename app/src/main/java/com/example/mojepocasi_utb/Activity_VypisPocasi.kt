@@ -48,7 +48,7 @@ class Activity_VypisPocasi : AppCompatActivity() {
                     URL("https://api.openweathermap.org/data/2.5/weather?q=$CITY&units=metric&appid=$API").readText(Charsets.UTF_8)
             } catch (e: Exception) {
                 response = null
-                findViewById<TextView>(R.id.textView_teplota).text = "hobbit"
+                findViewById<TextView>(R.id.textView_teplota).text = "Chyba!"
             }
 
             return response
