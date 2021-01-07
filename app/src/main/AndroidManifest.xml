@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MojePocasi_UTB">
         <activity android:name=".Activity_VypisPocasi"></activity>
-        <activity android:name=".Activity_SplashScreen" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Activity_SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
