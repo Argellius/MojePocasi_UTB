@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
@@ -12,6 +13,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import org.json.JSONObject
 import java.net.URL
 import java.text.DateFormat
@@ -22,6 +24,8 @@ import java.util.*
 class Activity_VypisPocasi : AppCompatActivity() {
     var CITY: String = ""
     val API: String = "88a9f98d6e5762b928e5883964444849"
+    private lateinit var mainViewModel: MainViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +33,23 @@ class Activity_VypisPocasi : AppCompatActivity() {
         supportActionBar?.hide()
         val myBtn = findViewById<Button>(R.id.button_najit)
         val poloha = findViewById<TextView>(R.id.editTextText_poloha)
+        val poloha_textView = findViewById<TextView>(R.id.textView_poloha)
+        val that = this;
+        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        mainViewModel.firstName.observe(this, {
+            poloha.text = it.firstName
+            poloha.text = it.firstName
+            this.CITY = it.firstName
+            weatherTask().execute()
+            Log.d("FirstName", it.firstName)
+            Log.d("LastName", it.lastName)
+            Log.d("AgeName", it.age.toString())
+        })
+
+
+
         myBtn.setOnClickListener{
+            mainViewModel.updateValue(poloha.text.toString(), "Jovanovic", 25)
             this.CITY = poloha.text.toString();
             findViewById<TextView>(R.id.textView_vitr_value).text = " "
             findViewById<TextView>(R.id.textView_min_value).text = " "
@@ -38,6 +58,7 @@ class Activity_VypisPocasi : AppCompatActivity() {
             findViewById<TextView>(R.id.textView_vychod_value).text = " "
             findViewById<TextView>(R.id.textView_zapad_value).text = " "
             weatherTask().execute()
+
         }
 
     }
