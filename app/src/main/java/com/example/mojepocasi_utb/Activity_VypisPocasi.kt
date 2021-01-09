@@ -1,18 +1,23 @@
 package com.example.mojepocasi_utb
 
+import android.app.Activity
+import android.content.Context
 import android.os.AsyncTask
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import org.json.JSONObject
 import java.net.URL
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class Activity_VypisPocasi : AppCompatActivity() {
     var CITY: String = ""
@@ -26,6 +31,12 @@ class Activity_VypisPocasi : AppCompatActivity() {
         val poloha = findViewById<TextView>(R.id.editTextText_poloha)
         myBtn.setOnClickListener{
             this.CITY = poloha.text.toString();
+            findViewById<TextView>(R.id.textView_vitr_value).text = " "
+            findViewById<TextView>(R.id.textView_min_value).text = " "
+            findViewById<TextView>(R.id.textView_max_value).text = " "
+            findViewById<TextView>(R.id.textView_pocasi_popis).text = " "
+            findViewById<TextView>(R.id.textView_vychod_value).text = " "
+            findViewById<TextView>(R.id.textView_zapad_value).text = " "
             weatherTask().execute()
         }
 
@@ -39,6 +50,18 @@ class Activity_VypisPocasi : AppCompatActivity() {
             findViewById<TextView>(R.id.ChybaText).visibility = View.GONE
 
         }
+        fun Fragment.hideKeyboard() {
+            view?.let { activity?.hideKeyboard(it) }
+        }
+
+        fun Activity.hideKeyboard() {
+            hideKeyboard(currentFocus ?: View(this))
+        }
+
+        fun Context.hideKeyboard(view: View) {
+            val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+        }
 
         override fun doInBackground(vararg p0: String?): String? {
             var response: String?
@@ -46,9 +69,14 @@ class Activity_VypisPocasi : AppCompatActivity() {
             try {
                 response =
                     URL("https://api.openweathermap.org/data/2.5/weather?q=$CITY&units=metric&appid=$API").readText(Charsets.UTF_8)
+                hideKeyboard()
+
+
             } catch (e: Exception) {
                 response = null
                 findViewById<TextView>(R.id.textView_teplota).text = "Chyba!"
+                findViewById<TextView>(R.id.textView_poloha).text = "Neznámá poloha"
+
             }
 
             return response
