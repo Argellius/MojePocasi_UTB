@@ -23,8 +23,9 @@ import java.util.*
 
 class Activity_VypisPocasi : AppCompatActivity() {
     var CITY: String = ""
-    val API: String = "88a9f98d6e5762b928e5883964444849"
+    val API: String = "26b062aa8ccc96362764a7997d99f063"
     private lateinit var mainViewModel: MainViewModel
+    var polohyArray: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,33 +35,43 @@ class Activity_VypisPocasi : AppCompatActivity() {
         val myBtn = findViewById<Button>(R.id.button_najit)
         val poloha = findViewById<TextView>(R.id.editTextText_poloha)
         val poloha_textView = findViewById<TextView>(R.id.textView_poloha)
-        val that = this;
+        val that = this
+
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         mainViewModel.firstName.observe(this, {
             poloha.text = it.firstName
-            poloha.text = it.firstName
             this.CITY = it.firstName
-            weatherTask().execute()
+            polohyArray = it.lastName;
             Log.d("FirstName", it.firstName)
             Log.d("LastName", it.lastName)
             Log.d("AgeName", it.age.toString())
+
         })
 
 
 
+
         myBtn.setOnClickListener{
-            mainViewModel.updateValue(poloha.text.toString(), "Jovanovic", 25)
             this.CITY = poloha.text.toString();
+            weatherTask().execute()
+            AddCity(CITY);
             findViewById<TextView>(R.id.textView_vitr_value).text = " "
             findViewById<TextView>(R.id.textView_min_value).text = " "
             findViewById<TextView>(R.id.textView_max_value).text = " "
             findViewById<TextView>(R.id.textView_pocasi_popis).text = " "
             findViewById<TextView>(R.id.textView_vychod_value).text = " "
             findViewById<TextView>(R.id.textView_zapad_value).text = " "
-            weatherTask().execute()
-
+            mainViewModel.updateValue(poloha.text.toString(), polohyArray, 25)
         }
 
+    }
+
+    fun AddCity(city : String)
+    {
+        if (polohyArray.length != 0)
+            polohyArray += "; " + city
+        else
+            polohyArray += city
     }
 
     inner class weatherTask() : AsyncTask<String, Void, String>() {
@@ -85,13 +96,13 @@ class Activity_VypisPocasi : AppCompatActivity() {
         }
 
         override fun doInBackground(vararg p0: String?): String? {
+            var that = this;
             var response: String?
 
             try {
                 response =
                     URL("https://api.openweathermap.org/data/2.5/weather?q=$CITY&units=metric&appid=$API").readText(Charsets.UTF_8)
                 hideKeyboard()
-
 
             } catch (e: Exception) {
                 response = null
@@ -134,10 +145,9 @@ class Activity_VypisPocasi : AppCompatActivity() {
                     formatter.format(vychod * 1000)
                 findViewById<TextView>(R.id.textView_zapad_value).text =
                     formatter.format(zapad * 1000)
-
-
                 findViewById<ProgressBar>(R.id.nacitani).visibility = View.GONE
                 findViewById<ConstraintLayout>(R.id.hlavniController).visibility = View.VISIBLE
+
             } catch (e: Exception) {
                 findViewById<ProgressBar>(R.id.nacitani).visibility = View.GONE
                 findViewById<ConstraintLayout>(R.id.hlavniController).visibility = View.VISIBLE

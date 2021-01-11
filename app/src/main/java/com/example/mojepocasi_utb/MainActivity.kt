@@ -19,7 +19,9 @@ class MainActivity : AppCompatActivity() {
 
         val btnHistorie = findViewById(R.id.button_Historie) as Button
         btnHistorie.setOnClickListener {
-            //Historie
+            val intent = Intent(this, Activity_historie::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
 
