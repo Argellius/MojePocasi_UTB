@@ -14,12 +14,10 @@ class Activity_historie : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_historie)
         supportActionBar?.hide()
-
         var listView = findViewById(R.id.listView_history) as ListView
-
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        mainViewModel.firstName.observe(this, {
-            val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,  it.lastName.trim().split(';'))
+        mainViewModel.data.observe(this, {
+            val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,  it.vyhledavaniHistorie.trim().split(';'))
             listView.adapter = adapter
 
         })

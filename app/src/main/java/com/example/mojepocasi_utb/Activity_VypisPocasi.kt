@@ -38,14 +38,12 @@ class Activity_VypisPocasi : AppCompatActivity() {
         val that = this
 
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        mainViewModel.firstName.observe(this, {
-            poloha.text = it.firstName
-            this.CITY = it.firstName
-            polohyArray = it.lastName;
-            Log.d("FirstName", it.firstName)
-            Log.d("LastName", it.lastName)
-            Log.d("AgeName", it.age.toString())
-
+        mainViewModel.data.observe(this, {
+            poloha.text = it.posledniVyhledavani
+            this.CITY = it.posledniVyhledavani
+            polohyArray = it.vyhledavaniHistorie;
+            Log.d("posledniVyhledavani", it.posledniVyhledavani)
+            Log.d("vyhledavaniHistorie", it.vyhledavaniHistorie)
         })
 
 
@@ -61,7 +59,7 @@ class Activity_VypisPocasi : AppCompatActivity() {
             findViewById<TextView>(R.id.textView_pocasi_popis).text = " "
             findViewById<TextView>(R.id.textView_vychod_value).text = " "
             findViewById<TextView>(R.id.textView_zapad_value).text = " "
-            mainViewModel.updateValue(poloha.text.toString(), polohyArray, 25)
+            mainViewModel.updateValue(poloha.text.toString(), polohyArray)
         }
 
     }

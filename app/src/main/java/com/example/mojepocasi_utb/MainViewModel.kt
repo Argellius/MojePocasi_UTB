@@ -11,9 +11,9 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     private val repository = ProtoRepository(application)
 
-    val firstName = repository.readProto.asLiveData()
+    val data = repository.readProto.asLiveData()
 
-    fun updateValue(firstName: String, lastName: String, age: Int) = viewModelScope.launch(Dispatchers.IO) {
-        repository.updateValue(firstName, lastName, age)
+    fun updateValue(posledniVyhledavani: String, vyhledavaniHistorie: String) = viewModelScope.launch(Dispatchers.IO) {
+        repository.updateValue(posledniVyhledavani, vyhledavaniHistorie)
     }
 }
