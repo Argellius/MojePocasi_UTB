@@ -15,7 +15,13 @@ class Activity_SplashScreen : AppCompatActivity() {
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
             finish()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }, 2500)
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
     }
 }

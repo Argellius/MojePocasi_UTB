@@ -72,6 +72,11 @@ class Activity_VypisPocasi : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+    }
+
     fun AddCity(city : String)
     {
         if (polohyArray.length != 0)
