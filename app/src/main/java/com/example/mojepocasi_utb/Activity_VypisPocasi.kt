@@ -22,30 +22,38 @@ import java.util.*
 
 
 class Activity_VypisPocasi : AppCompatActivity() {
-    var CITY: String = ""
-    val API: String = "26b062aa8ccc96362764a7997d99f063"
+    private var CITY: String = "Praha"
+    private val API: String = "26b062aa8ccc96362764a7997d99f063"
     private lateinit var mainViewModel: MainViewModel
-    var polohyArray: String = ""
-
+    private var polohyArray: String = ""
+    private var ClickedValuelistViewItem: String? = "";
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__vypis_pocasi)
         supportActionBar?.hide()
+
         val myBtn = findViewById<Button>(R.id.button_najit)
         val poloha = findViewById<TextView>(R.id.editTextText_poloha)
         val poloha_textView = findViewById<TextView>(R.id.textView_poloha)
-        val that = this
+        ClickedValuelistViewItem = intent.getStringExtra("ClickedValuelistViewItem")
 
-        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        mainViewModel.data.observe(this, {
-            poloha.text = it.posledniVyhledavani
-            this.CITY = it.posledniVyhledavani
-            polohyArray = it.vyhledavaniHistorie;
-            Log.d("posledniVyhledavani", it.posledniVyhledavani)
-            Log.d("vyhledavaniHistorie", it.vyhledavaniHistorie)
-        })
+        if (ClickedValuelistViewItem == null) {
+            mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+            mainViewModel.data.observe(this, {
+                poloha.text = it.posledniVyhledavani
+                this.CITY = it.posledniVyhledavani
+                polohyArray = it.vyhledavaniHistorie;
+                Log.d("posledniVyhledavani", it.posledniVyhledavani)
+                Log.d("vyhledavaniHistorie", it.vyhledavaniHistorie)
+            })
+        }
 
+        else {
+
+            this.CITY = (ClickedValuelistViewItem as String).trim()
+            weatherTask().execute()
+        }
 
 
 
